@@ -127,15 +127,14 @@ public final class WicketTagIdentifier extends AbstractMarkupFilter
 				tag.setUserData(MARKUP_CACHE_KEY, getMarkupResourceStream().getCacheKey());
 				tag.setModified(true);
 				
-				if (!isRaw(tag) && tag.isClose() == false)
+				if (isRaw(tag)) 
+				{
+					tag.setFlag(ComponentTag.RENDER_RAW, true);
+				}
+				else if (tag.isClose() == false)
 				{
 					tag.setAutoComponentTag(true);
 				}				
-			}
-
-			if (isRaw(tag)) 
-			{
-				tag.setFlag(ComponentTag.RENDER_RAW, true);
 			}
 
 			// If the tag is not a well-known wicket namespace tag
